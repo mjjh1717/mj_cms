@@ -11,6 +11,7 @@ module.exports = {
   configureWebpack: {
     resolve: {
       alias: {
+        '@': path.resolve(__dirname, 'src'),
         components: '@/components'
       }
     },
@@ -26,10 +27,13 @@ module.exports = {
     // elementplus和webpack兼容问题
     // https://www.cnblogs.com/zyfenblog/p/15870740.html
     module: {
-      rules: [{
-        test: /\.mjs$/, include: /node_modules/,
-        type: 'javascript/auto'
-      }]
+      rules: [
+        {
+          test: /\.mjs$/,
+          include: /node_modules/,
+          type: 'javascript/auto'
+        }
+      ]
     }
   }
   // 2.2
