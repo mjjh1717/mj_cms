@@ -1,4 +1,5 @@
 {
+  // 将ts代码转到对应版本的js代码
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
