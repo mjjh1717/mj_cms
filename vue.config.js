@@ -10,6 +10,17 @@ module.exports = {
   // publicPath: './',
   // 2.和webpack的模式一致,然后合并到webpack代码中
   // 2.1
+  devServer: {
+    proxy: {
+      '^/api': {
+        target: 'http://152.136.185.210:5000',
+        pathRewrite: {
+          '^/api': ''
+        },
+        changeOrigin: true
+      }
+    }
+  },
   configureWebpack: {
     resolve: {
       alias: {

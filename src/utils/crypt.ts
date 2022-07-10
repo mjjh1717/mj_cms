@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 //DES 加密
 import CryptoJS from 'crypto-js'
 const normolKey = '88888888'

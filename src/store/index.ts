@@ -1,19 +1,17 @@
 // store.ts
-import { InjectionKey } from 'vue'
-import { createStore, Store } from 'vuex'
+import { createStore } from 'vuex'
+import { rootState } from './types'
+import login from './login/login'
 
-// 为 store state 声明类型
-export interface State {
-  name: string
-  token: string
-}
-
-// 定义 injection key
-export const key: InjectionKey<Store<State>> = Symbol()
-
-export const store = createStore<State>({
+export const store = createStore<rootState>({
   state: {
     name: 'codermjjh',
     token: ''
+  },
+  getters: {},
+  mutations: {},
+  actions: {},
+  modules: {
+    login
   }
 })

@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 import { defineExpose, reactive, ref } from 'vue'
-// import { useStore } from 'vuex'
+import { useStore } from 'vuex'
 import { ElForm } from 'element-plus'
 // 工具类
 import localCache from '@/utils/cache'
@@ -21,13 +21,15 @@ import crypt from '@/utils/crypt'
 
 import { rules } from '../config/account-config'
 
-// const store = useStore()
+const store = useStore()
 
+// 初始化数据
 const account = reactive({
   name: localCache.getCache('name') ?? '',
   password: crypt.decryptByDES(localCache.getCache('password')) ?? ''
 })
 
+// 获取输入框对象
 const formRef = ref<InstanceType<typeof ElForm>>()
 
 const loginAction = (isKeepPassword: boolean) => {
@@ -44,8 +46,9 @@ const loginAction = (isKeepPassword: boolean) => {
         localCache.deleteCache('password')
       }
 
-      // // 2.开始进行登录验证
-      // store.dispatch('login/accountLoginAction', { ...account })
+      // 2.开始进行登录验证
+      // 调用stro中的方法,将account中的数据结构后传入
+      store.dispatch('login/accountLoginAction', { ...account })
     }
   })
 }

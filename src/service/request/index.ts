@@ -17,7 +17,7 @@ interface MJRequestConfig<T = AxiosResponse> extends AxiosRequestConfig {
   interceptors?: MJRequestInterceptors<T>
   showLoading?: boolean
 }
-const DEFAULT_LOADING = false
+const DEFAULT_LOADING = true
 
 class MJRequest {
   // 引入类型
@@ -44,7 +44,7 @@ class MJRequest {
     // 添加所有实例都有的拦截器
     this.instance.interceptors.request.use(
       (config) => {
-        console.log('All_Request_success')
+        // console.log('All_Request_success')
         if (this.showLoading) {
           this.loading = ElLoading.service({
             lock: true,
@@ -55,14 +55,14 @@ class MJRequest {
         return config
       },
       (err) => {
-        console.log('All_Request_error')
+        // console.log('All_Request_error')
         return err
       }
     )
 
     this.instance.interceptors.response.use(
       (res) => {
-        console.log('All_Response_success')
+        // console.log('All_Response_success')
         setTimeout(() => {
           this.loading?.close()
         }, 1000)
@@ -78,7 +78,7 @@ class MJRequest {
         return res.data
       },
       (err) => {
-        console.log('All_Response_error')
+        // console.log('All_Response_error')
         this.loading?.close()
         switch (err.response.status) {
           case 404:
@@ -99,7 +99,7 @@ class MJRequest {
       if (config.interceptors?.requestInterceptor) {
         config = config.interceptors.requestInterceptor(config)
       }
-      if (config.showLoading === true) {
+      if (config.showLoading === false) {
         this.showLoading = config.showLoading
       }
       this.instance
@@ -121,20 +121,20 @@ class MJRequest {
         })
     })
   }
-  get<T = any>(config: AxiosRequestConfig<T>): Promise<T> {
-    return this.request({ ...config, method: 'GET' })
+  get<T>(config: MJRequestConfig<T>): Promise<T> {
+    return this.request<T>({ ...config, method: 'GET' })
   }
 
-  post<T = any>(config: AxiosRequestConfig<T>): Promise<T> {
-    return this.request({ ...config, method: 'POST' })
+  post<T>(config: MJRequestConfig<T>): Promise<T> {
+    return this.request<T>({ ...config, method: 'POST' })
   }
 
-  patch<T = any>(config: AxiosRequestConfig<T>): Promise<T> {
-    return this.request({ ...config, method: 'PATCH' })
+  delete<T>(config: MJRequestConfig<T>): Promise<T> {
+    return this.request<T>({ ...config, method: 'DELETE' })
   }
 
-  delete<T = any>(config: AxiosRequestConfig<T>): Promise<T> {
-    return this.request({ ...config, method: 'DELETE' })
+  patch<T>(config: MJRequestConfig<T>): Promise<T> {
+    return this.request<T>({ ...config, method: 'PATCH' })
   }
 }
 

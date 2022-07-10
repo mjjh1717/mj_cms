@@ -8,45 +8,41 @@
         <el-input v-model="account.password" show-password />
       </el-form-item>
       <el-form-item label="确认密码" prop="password">
-        <el-input v-model="account.password" show-password />
+        <el-input v-model="account.passwordagain" show-password />
       </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
-// import { useStore } from 'vuex'
+import { defineExpose, ref, reactive } from 'vue'
+import { useStore } from 'vuex'
 import { ElForm } from 'element-plus'
-import localCache from '@/utils/cache'
 
 import { rules } from '../config/account-config'
-// const store = useStore()
+const store = useStore()
 
 const account = reactive({
-  name: localCache.getCache('name') ?? '',
-  password: localCache.getCache('password') ?? ''
+  name: '',
+  password: '',
+  passwordagain: ''
 })
 
-// const formRef = ref<InstanceType<typeof ElForm>>()
+const formRef = ref<InstanceType<typeof ElForm>>()
 
-// const loginAction = (isKeepPassword: boolean) => {
-//   formRef.value?.validate((valid) => {
-//     if (valid) {
-//       // 1.判断是否需要记住密码
-//       if (isKeepPassword) {
-//         // 本地缓存
-//         localCache.setCache('name', account.name)
-//         localCache.setCache('password', account.password)
-//       } else {
-//         localCache.deleteCache('name')
-//         localCache.deleteCache('password')
-//       }
-//       // // 2.开始进行登录验证
-//       // store.dispatch('login/accountLoginAction', { ...account })
-//     }
-//   })
-// }
+const registerAction = () => {
+  formRef.value?.validate((valid) => {
+    if (valid && account.password == account.passwordagain) {
+      console.log('我被注册啦', account)
+      store.dispatch('login/registerAction', { ...account })
+    } else {
+      console.log('两次密码需要一致')
+    }
+  })
+}
+defineExpose({
+  registerAction
+})
 </script>
 
 <style scoped></style>

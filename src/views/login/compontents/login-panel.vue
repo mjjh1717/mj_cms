@@ -1,8 +1,8 @@
 <template>
   <div class="login_panel">
     <h1 class="title"></h1>
-    <el-tabs type="border-card" stretch class="tabs">
-      <el-tab-pane>
+    <el-tabs type="border-card" stretch class="tabs" v-model="currentTab">
+      <el-tab-pane name="account">
         <template #label>
           <span class="tabs-label">
             <el-icon><Coordinate /></el-icon>
@@ -11,14 +11,14 @@
         </template>
         <login-account ref="accountRef" />
       </el-tab-pane>
-      <el-tab-pane>
+      <el-tab-pane name="register">
         <template #label>
           <span class="tabs-label">
             <el-icon><EditPen /></el-icon>
             <span>注册</span>
           </span>
         </template>
-        <LoginRegister />
+        <login-register ref="registerRef" />
       </el-tab-pane>
     </el-tabs>
     <div class="account-control">
@@ -40,9 +40,17 @@ import LoginRegister from './login-register.vue'
 
 const isKeepPassword = ref(true)
 const accountRef = ref<InstanceType<typeof LoginAccount>>()
+const registerRef = ref<InstanceType<typeof LoginRegister>>()
+const currentTab = ref('account')
 // 调用子函数响应事件
 const handleLoginClick = () => {
-  accountRef.value?.loginAction(isKeepPassword.value)
+  if (currentTab.value === 'account') {
+    accountRef.value?.loginAction(isKeepPassword.value)
+  } else {
+    // 调用注册逻辑
+    console.log('注册', currentTab.value)
+    registerRef.value?.registerAction()
+  }
 }
 </script>
 
