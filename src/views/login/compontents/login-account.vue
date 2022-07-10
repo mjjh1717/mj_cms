@@ -21,7 +21,7 @@ import crypt from '@/utils/crypt'
 
 import { rules } from '../config/account-config'
 
-const store = useStore()
+// const store = useStore()
 
 const account = reactive({
   name: localCache.getCache('name') ?? '',
