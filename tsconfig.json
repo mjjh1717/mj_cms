@@ -1,23 +1,38 @@
 {
-  // 将ts代码转到对应版本的js代码
+  // ts配置
   "compilerOptions": {
+    // 将ts代码转到低版本的js代码
     "target": "esnext",
+    // 目标代码需要使用的模块化方案(commonjs require/module.exports/es moule import/export)
     "module": "esnext",
+    // 严格模式开关
     "strict": true,
+    // 对jsx代码处理方式
     "jsx": "preserve",
+    // 辅助的导入功能
     "importHelpers": true,
+    // 按照node的方式解析模块
     "moduleResolution": "node",
+    // 跳过对一些库的类型检测
     "skipLibCheck": true,
+    // export default 和 module.exports = {}
+    // es module 和commonjs能不能混合使用
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    // 要不要生成映射文件(ts -> js)
     "sourceMap": true,
+    // 文件了在解析时,基本URL
     "baseUrl": ".",
+    // 直接具体要解析使用的类型
     "types": ["webpack-env"],
+    // 路径解析
     "paths": {
       "@/*": ["src/*"]
     },
+    // 可以知道在项目中可以使用那些库的类型
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
+  // 需要使用ts解析的文件
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
@@ -25,5 +40,6 @@
     "tests/**/*.ts",
     "tests/**/*.tsx"
   ],
+  // 排除在include中引入库被解析风险
   "exclude": ["node_modules"]
 }
