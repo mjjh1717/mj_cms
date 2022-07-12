@@ -7,3 +7,4 @@ declare module '*.vue' {
 
 declare let $store: any
 declare module 'crypto-js'
+declare module 'particles.vue3'

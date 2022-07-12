@@ -1,8 +1,8 @@
 <template>
   <div class="login_panel">
-    <h1 class="title"></h1>
+    <!-- <h1 class="title"></h1> -->
     <el-tabs type="border-card" stretch class="tabs" v-model="currentTab">
-      <el-tab-pane name="account">
+      <el-tab-pane name="account" class="tabs-pane">
         <template #label>
           <span class="tabs-label">
             <el-icon><Coordinate /></el-icon>
@@ -11,7 +11,7 @@
         </template>
         <login-account ref="accountRef" />
       </el-tab-pane>
-      <el-tab-pane name="register">
+      <el-tab-pane name="register" class="tabs-pane">
         <template #label>
           <span class="tabs-label">
             <el-icon><EditPen /></el-icon>
@@ -59,9 +59,9 @@ const handleLoginClick = () => {
   margin-bottom: 150px;
   width: 320px;
 }
-.title {
+/* .title {
   text-align: center;
-}
+} */
 
 .account-control {
   margin-top: 10px;
@@ -72,5 +72,12 @@ const handleLoginClick = () => {
 .login-btn {
   width: 100%;
   margin-top: 10px;
+}
+.tabs .tabs-label .el-icon {
+  vertical-align: middle;
+}
+.tabs .tabs-label span {
+  vertical-align: middle;
+  margin-left: 4px;
 }
 </style>

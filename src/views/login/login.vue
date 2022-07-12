@@ -15,6 +15,6 @@ import loginPanel from './compontents/login-panel.vue'
   align-items: center;
   width: 100%;
   height: 100%;
-  background-color: rgba(230, 230, 230, 1);
+  // background-color: rgba(230, 230, 230, 1);
 }
 </style>
