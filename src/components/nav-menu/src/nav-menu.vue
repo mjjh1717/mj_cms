@@ -26,7 +26,10 @@
             </template>
             <!-- 遍历里面的item -->
             <template v-for="subitem in item.children" :key="subitem.id">
-              <el-menu-item :index="subitem.id + ''">
+              <el-menu-item
+                :index="subitem.id + ''"
+                @click="handleMenuItemClick(subitem)"
+              >
                 <span>{{ subitem.name }}</span>
               </el-menu-item>
             </template>
@@ -45,18 +48,29 @@
 
 <script setup lang="ts">
 import { computed, defineProps } from 'vue'
-import { useStore } from '@/store'
+// import { useStore } from '@/store'
+import { useRouter } from 'vue-router'
 import {
   MagicStick,
   DataAnalysis,
   ShoppingBag,
   Coffee
 } from '@element-plus/icons-vue'
+import localCache from '@/utils/cache'
 
-const store = useStore()
-const userMenus = computed(() => store.state.login.userMenus)
+// const store = useStore()
+const userMenus = computed(() => localCache.getCache('userMenus'))
 const icon = [MagicStick, DataAnalysis, ShoppingBag, Coffee]
 const props = defineProps({ collapse: Boolean }) // 获取props
+
+// router
+const router = useRouter()
+const handleMenuItemClick = (item: any) => {
+  // console.log('pushRouter')
+  router.push({
+    path: item.url ?? '/not-found'
+  })
+}
 </script>
 
 <style scoped lang="less">

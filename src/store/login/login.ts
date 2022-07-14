@@ -7,6 +7,7 @@ import {
   requestUserMenusByRoleId
 } from '@/service/login/login'
 import localCache from '@/utils/cache'
+import { mapMenusToRoutes, mapMenusToPermissions } from '@/utils/map-menus'
 import router from '@/router'
 import { IAccount } from '@/service/login/type'
 const loginModule: Module<ILoginState, rootState> = {
@@ -14,7 +15,8 @@ const loginModule: Module<ILoginState, rootState> = {
   state: {
     token: '',
     userInfo: {},
-    userMenus: []
+    userMenus: [],
+    permissions: []
   },
   getters: {},
   mutations: {
@@ -26,6 +28,21 @@ const loginModule: Module<ILoginState, rootState> = {
     },
     changeUserMenus(state, userMenus: any) {
       state.userMenus = userMenus
+
+      console.log('注册动态路由')
+
+      // userMenus => routes
+      const routes = mapMenusToRoutes(userMenus)
+      console.log(routes)
+
+      // 将routes => router.main.children
+      routes.forEach((route) => {
+        router.addRoute('main', route)
+      })
+
+      // 获取用户按钮的权限
+      const permissions = mapMenusToPermissions(userMenus)
+      state.permissions = permissions
     }
   },
   actions: {

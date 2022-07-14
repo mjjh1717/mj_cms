@@ -26,7 +26,9 @@ const store = useStore()
 // 初始化数据
 const account = reactive({
   name: localCache.getCache('name') ?? '',
-  password: crypt.decryptByDES(localCache.getCache('password')) ?? ''
+  password: localCache.getCache('password')
+    ? crypt.decryptByDES(localCache.getCache('password'))
+    : ''
 })
 
 // 获取输入框对象
