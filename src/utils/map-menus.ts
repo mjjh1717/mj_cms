@@ -55,7 +55,7 @@ export function pathMapToMenu(
       const findMenu = pathMapToMenu(menu.children ?? [], currentPath)
       if (findMenu) {
         breadcrumbs?.push({ name: menu.name })
-        breadcrumbs?.push({ name: findMenu.name })
+        breadcrumbs?.push({ name: findMenu.name, path: findMenu.url })
         return findMenu
       }
     } else if (menu.type === 2 && menu.url === currentPath) {
@@ -83,7 +83,7 @@ export function pathMapToMenu(
 //   return breadcrumbs
 // }
 
-// // /main/system/role  -> type === 2 对应menu
+// /main/system/role  -> type === 2 对应menu
 // export function pathMapToMenu(userMenus: any[], currentPath: string): any {
 //   for (const menu of userMenus) {
 //     if (menu.type === 1) {

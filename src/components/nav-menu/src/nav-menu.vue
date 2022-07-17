@@ -6,6 +6,7 @@
       <span class="title" v-show="!props.collapse">MJ_CMS</span>
     </div>
     <el-menu
+      :default-active="defaultValue"
       class="el-menu-vertical"
       background-color="rgba(219, 219, 219, 0.1)"
       text-color="4a4a4a"
@@ -47,9 +48,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps } from 'vue'
+import { computed, defineProps, ref } from 'vue'
 // import { useStore } from '@/store'
-import { useRouter } from 'vue-router'
+import { pathMapToMenu } from '@/utils/map-menus'
+import { useRouter, useRoute } from 'vue-router'
 import {
   MagicStick,
   DataAnalysis,
@@ -65,6 +67,12 @@ const props = defineProps({ collapse: Boolean }) // 获取props
 
 // router
 const router = useRouter()
+const route = useRoute()
+const currentPath = route.path
+// data
+const menu = pathMapToMenu(userMenus.value, currentPath)
+const defaultValue = ref(menu.id + '')
+
 const handleMenuItemClick = (item: any) => {
   // console.log('pushRouter')
   router.push({

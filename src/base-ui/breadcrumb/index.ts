@@ -1,5 +1,5 @@
-import HyBreadcrumb from './src/breadcrumb.vue'
+import MjBreadcrumb from './src/breadcrumb.vue'
 
 export * from './types'
 
-export default HyBreadcrumb
+export default MjBreadcrumb

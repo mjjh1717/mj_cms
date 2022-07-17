@@ -8,12 +8,17 @@ import { store } from './store'
 import 'element-plus/theme-chalk/index.css'
 // 粒子特效
 import Particles from 'particles.vue3'
+import { setupStore } from './store'
 
 // 引入axios_demo测试axios
 // import './service/axios_demo'
 // import mjRequest from './service'
-
-createApp(App).use(router).use(store).use(Particles).mount('#app')
+const app = createApp(App)
+app.use(store)
+setupStore()
+app.use(router)
+app.use(Particles)
+app.mount('#app')
 
 // console.log(process.env.VUE_APP_BASE_URL)
 // console.log(process.env.VUE_APP_TIME_OUT)
