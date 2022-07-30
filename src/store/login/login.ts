@@ -29,11 +29,11 @@ const loginModule: Module<ILoginState, rootState> = {
     changeUserMenus(state, userMenus: any) {
       state.userMenus = userMenus
 
-      console.log('注册动态路由')
+      // console.log('注册动态路由')
 
       // userMenus => routes
       const routes = mapMenusToRoutes(userMenus)
-      console.log(routes)
+      // console.log(routes)
 
       // 将routes => router.main.children
       routes.forEach((route) => {
